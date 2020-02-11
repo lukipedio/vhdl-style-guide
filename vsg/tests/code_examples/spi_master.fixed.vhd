@@ -367,7 +367,6 @@ begin
   --  GENERATE BLOCKS
   --=============================================================================================
   -- spi clk generator: generate spi_clk from core_clk depending on CPOL
-
   SPI_SCK_CPOL_0_PROC : if CPOL = '0' generate
   begin
     spi_clk <= core_clk;            -- for CPOL=0, spi clk has idle LOW
@@ -381,7 +380,6 @@ begin
   -----------------------------------------------------------------------------------------------
   -- Sampling clock enable generation: generate 'samp_ce' from 'core_ce' or 'core_n_ce' depending on CPHA
   -- always sample data at the half-cycle of the fsm update cell
-
   SAMP_CE_CPHA_0_PROC : if CPHA = '0' generate
   begin
     samp_ce <= core_ce;
@@ -394,7 +392,6 @@ begin
 
   -----------------------------------------------------------------------------------------------
   -- FSM clock enable generation: generate 'fsm_ce' from core_ce or core_n_ce depending on CPHA
-
   FSM_CE_CPHA_0_PROC : if CPHA = '0' generate
   begin
     fsm_ce <= core_n_ce;            -- for CPHA=0, latch registers at rising edge of negative core clock enable

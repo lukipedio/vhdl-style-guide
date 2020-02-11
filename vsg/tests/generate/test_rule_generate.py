@@ -65,7 +65,7 @@ class testRuleGenerateMethods(unittest.TestCase):
         oRule = generate.rule_005()
         oRule.case = 'lower'
 
-        dExpected = [6,21,26,31,36,41,46,51,56,60,65,68,71,77,83,88,90,94,104]
+        dExpected = [6,21,26,31,36,41,46,51,56,60,65,68,71,77,83,88,90,94,104,110]
         oRule.analyze(oFile)
         self.assertEqual(oRule.violations, dExpected)
 
@@ -123,7 +123,7 @@ class testRuleGenerateMethods(unittest.TestCase):
         oRule = generate.rule_010()
         oRule.case = 'upper'
 
-        dExpected = [9,14,24,29,34,39,44,49,54,58,62,73,75,79,81,86,96,98,100,106]
+        dExpected = [9,14,24,29,34,39,44,49,54,58,62,73,75,79,81,86,96,98,100,106,112]
         oRule.analyze(oFile)
         self.assertEqual(oRule.violations, dExpected)
 
@@ -151,7 +151,7 @@ class testRuleGenerateMethods(unittest.TestCase):
         oRule = generate.rule_012()
         oRule.case = 'lower'
 
-        dExpected = [9,29,34,39,44,49,54,58,62,75,79,81,86,106]
+        dExpected = [9,29,34,39,44,49,54,58,62,75,79,81,86,106,112]
         oRule.analyze(oFile)
         self.assertEqual(oRule.violations, dExpected)
 

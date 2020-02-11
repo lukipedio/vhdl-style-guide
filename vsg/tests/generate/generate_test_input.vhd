@@ -105,4 +105,10 @@ END GENERATE generate_1;
     if (i = 0) generate
     end generate GENERATE_1;
 
+
+  -- Comments above generates are allowed
+  GENERATE_1 : for i in 0 to 7 generate
+    a <= b
+  end generate GENERATE_1;
+
 end architecture ARCH;

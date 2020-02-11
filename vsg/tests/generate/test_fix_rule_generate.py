@@ -34,6 +34,12 @@ class testFixRuleGenerateMethods(unittest.TestCase):
     def test_fix_rule_004(self):
         oRule = generate.rule_004()
         oRule.fix(self.oFile)
+
+        self.assertEqual(self.oFile.lines[56].line, '')
+        self.assertEqual(self.oFile.lines[57].line, '  GENERATE_1 : if CONDITION = \'1\' generate')
+        self.assertEqual(self.oFile.lines[110].line, '  -- Comments above generates are allowed')
+        self.assertEqual(self.oFile.lines[111].line, '  GENERATE_1 : for i in 0 to 7 generate')
+
         oRule.analyze(self.oFile)
         self.assertEqual(oRule.violations, [])
 

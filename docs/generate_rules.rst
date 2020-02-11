@@ -69,6 +69,7 @@ generate_004
 ############
 
 This rule checks for a blank line before the **generate** keyword.
+Comments are allowed before the **generate** keyword.
 
 **Violation**
 
@@ -77,12 +78,18 @@ This rule checks for a blank line before the **generate** keyword.
    wr_en <= '1';
    RAM_ARRAY: for i in 0 to 7 generate
 
+   -- Create all the RAMs
+   RAM_ARRAY: for i in 0 to 7 generate
+
 **Fix**
 
 .. code-block:: vhdl
 
    wr_en <= '1';
 
+   RAM_ARRAY: for i in 0 to 7 generate
+
+   -- Create all the RAMs
    RAM_ARRAY: for i in 0 to 7 generate
 
 generate_005
