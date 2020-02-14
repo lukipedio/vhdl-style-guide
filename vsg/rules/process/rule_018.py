@@ -1,5 +1,6 @@
 
 from vsg import rule
+from vsg import utils
 
 import re
 
@@ -16,7 +17,7 @@ class rule_018(rule.rule):
         self.subphase = 2
 
     def _pre_analyze(self):
-        self.dFix['processLabel'] = {}
+        self.dFix = {}
         self.labelStack = ''
         self.iProcStartLine = 0
         self.iProcLabelLine = 0
@@ -24,20 +25,25 @@ class rule_018(rule.rule):
     def _analyze(self, oFile, oLine, iLineNumber):
         if oLine.isProcessKeyword:
             self.iProcStartLine = iLineNumber
-            oMatch = re.match('^\s*(\S+)\s*:\s*process', oLine.lineLower)
+            oMatch = re.match('^\s*\S+\s*:\s*process', oLine.lineLower)
             if oMatch:
                 self.iProcLabelLine = iLineNumber
-                self.labelStack = oMatch.group(1)
+                self.labelStack = utils.extract_label(oLine)[0]
         if oLine.isEndProcess:
-            if not re.match('^\s*\S+\s+\S+\s+\S+', oLine.line):
-                self.add_violation(iLineNumber)
+            dFix = {}
+            dFix['lineNumber'] = iLineNumber
             if self.labelStack and self.iProcStartLine == self.iProcLabelLine:
-                self.dFix['processLabel'][iLineNumber] = self.labelStack
+                dFix['processLabel'] = self.labelStack
+            if not re.match('^\s*\S+\s+\S+\s+\S+', oLine.line):
+                self.add_violation(dFix)
             self.labelStack = ''
 
     def _fix_violations(self, oFile):
-        for iLineNumber, oLine in enumerate(oFile.lines):
-            if oLine.isEndProcess and not re.match('^\s*\S+\s+\S+\s+\S+', oLine.line):
-                if iLineNumber in self.dFix['processLabel']:
-                    oMatch = re.search(r'^(\s*)\S+\s+\S+', oLine.line)
-                    oLine.line = oMatch.group(1) + 'end process ' + self.dFix['processLabel'][iLineNumber] + ';'
+         for dViolation in self.violations:
+             try:
+               oLine = oFile.lines[dViolation['lineNumber']]
+               sLine = oLine.line
+               iIndex = oLine.lineLower.find('process') + len('process')
+               oLine.update_line(sLine[:iIndex] + ' ' + dViolation['processLabel'] + sLine[iIndex:])
+             except KeyError:
+               pass
