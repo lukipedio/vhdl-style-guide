@@ -890,3 +890,48 @@ Refer to the section `Configuring Keyword Alignment Rules <configuring_keyword_a
 
    end process proc_1;
 
+process_036
+############
+
+This rule checks for valid prefixes on process labels.
+The default prefix is *proc\_*.
+
+Refer to the section `Configuring Prefix and Suffix Rules <configuring_prefix_suffix.html>`_ for information on changing the allowed prefixes.
+
+**Violation**
+
+.. code-block:: vhdl
+
+   main: process () is
+
+**Fix**
+
+.. code-block:: vhdl
+
+   proc_main: process () is
+
+process_037
+###########
+
+This rule checks for alignment of identifiers in attribute, type, subtype, constant, signal, variable and file declarations in the process declarative region.
+
+Refer to the section `Configuring Identifier Alignment Rules <configuring_declaration_identifier_alignment.html>`_ for information on changing the configurations.
+
+**Violation**
+
+.. code-block:: vhdl
+
+   signal    sig1 : std_logic;
+   file some_file : 
+   variable v_var1 : std_logic;
+   type t_myType : std_logic;
+   
+**Fix**
+
+.. code-block:: vhdl
+
+   signal   sig1 : std_logic;
+   file     some_file : 
+   variable v_var1 : std_logic;
+   type     t_myType : std_logic;
+

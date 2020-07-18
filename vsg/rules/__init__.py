@@ -15,6 +15,7 @@ from .search_for_and_replace_keyword_rule import search_for_and_replace_keyword_
 from .case_rule import case_rule
 from .prefix_rule import prefix_rule
 from .suffix_rule import suffix_rule
+from .identifier_alignment_rule import identifier_alignment_rule
 
 from vsg.rules import after
 from vsg.rules import architecture
@@ -41,6 +42,7 @@ from vsg.rules import process
 from vsg.rules import procedure
 from vsg.rules import ranges
 from vsg.rules import sequential
+from vsg.rules import semicolon
 from vsg.rules import signal
 from vsg.rules import source_file
 from vsg.rules import subtype

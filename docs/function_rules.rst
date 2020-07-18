@@ -51,7 +51,7 @@ This rule checks a single space exists after the **function** keyword.
 function_003
 ############
 
-This rule checks for a single space after the function name and the (.'
+This rule checks for a single space between the function name and the (.'
 
 **Violation**
 
@@ -281,4 +281,73 @@ Refer to the section `Configuring Keyword Alignment Rules <configuring_keyword_a
 
    variable var1     : natural;
    variable var2     : natural;
+   constant c_period : time;
+
+function_013
+############
+
+This rule checks the **end** keyword has proper case.
+
+Refer to the section `Configuring Uppercase and Lowercase Rules <configuring_case.html>`_ for information on changing the default case.
+
+**Violation**
+
+.. code-block:: vhdl
+
+   END;
+
+   End function foo;
+
+**Fix**
+
+.. code-block:: vhdl
+
+   end;
+
+   end function foo;
+
+function_014
+############
+
+This rule checks the **function** keyword in the **end function** has proper case.
+
+Refer to the section `Configuring Uppercase and Lowercase Rules <configuring_case.html>`_ for information on changing the default case.
+
+**Violation**
+
+.. code-block:: vhdl
+
+   end FUNCTION;
+
+   end Function foo;
+
+**Fix**
+
+.. code-block:: vhdl
+
+   end function;
+
+   end function foo;
+
+function_015
+############
+
+This rule checks the identifiers for all declarations are aligned in the function declarative part.
+
+Refer to the section `Configuring Identifier Alignment Rules <configuring_declaration_identifier_alignment.html>`_ for information on changing the configurations.
+
+**Violation**
+
+.. code-block:: vhdl
+
+   variable var1 : natural;
+   signal sig1 : natural;
+   constant c_period : time;
+
+**Fix**
+
+.. code-block:: vhdl
+
+   variable var1     : natural;
+   signal   sig1     : natural;
    constant c_period : time;

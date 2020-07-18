@@ -231,7 +231,7 @@ class testFixRuleIfMethods(unittest.TestCase):
 
     def test_fix_compressed_line(self):
         oRuleList = rule_list.rule_list(oFileCompress)
-        oRuleList.fix(7)
+        oRuleList.fix()
 #        utils.debug_lines(oFileCompress, 8, 23)
         self.assertEqual(oFileCompress.lines[9].line, '    if (A = \'1\' and B = \'1\') then')
         self.assertEqual(oFileCompress.lines[10].line, '      X <= \'1\';')
@@ -285,7 +285,6 @@ class testFixRuleIfMethods(unittest.TestCase):
         oRule.analyze(oFile)
         self.assertEqual(oRule.violations, dExpected)
         self.assertEqual(oFile.lines[17].line, '    end if;')
-        self.assertEqual(oFile.lines[27].line, '    end if;')
 
     def test_fix_rule_029(self):
         lFile = utils.read_vhdlfile(os.path.join(os.path.dirname(__file__),'..','if_statement','if_test_input.vhd'))
@@ -331,3 +330,11 @@ class testFixRuleIfMethods(unittest.TestCase):
         self.assertEqual(oFileIf.lines[25].line, '    -- else code')
 
         self.assertEqual(oRule.violations, lExpected)
+
+    def test_fix_rule_034(self):
+        oRule = if_statement.rule_034()
+        dExpected = []
+        oRule.fix(oFile)
+        oRule.analyze(oFile)
+        self.assertEqual(oRule.violations, dExpected)
+        self.assertEqual(oFile.lines[27].line, '    end if;')
